@@ -455,7 +455,7 @@
          data-text="> age: 25"></p>
 
       <p class="terminal-line terminal-yellow type-line"
-         data-text="> status: still my favorite human ♡"></p>
+         data-text="> status: still my favorite human"></p>
 
       <p class="terminal-line terminal-green type-line"
          data-text="> loading birthday wishes... 100%"></p>
@@ -466,7 +466,7 @@
       <p class="terminal-line terminal-yellow" id="terminal-error"></p>
 
       <div id="opening-ending" style="display:none">
-        <p style="margin-top:25px">happy birthday, love ♡</p>
+        <p style="margin-top:25px">happy birthday, love!</p>
         <p style="color:#d7c9e9;font-size:.88rem">
           i've made a little something just for you.
         </p>
@@ -495,7 +495,7 @@
       <h2>coffee for my favorite person ☕</h2>
 
       <p>
-        because i know coffee is one of your favorite things,
+        since coffee is one of your favorite things,
         i prepared 5 little cups just for you.
       </p>
 
@@ -531,7 +531,7 @@
       </div>
 
       <p class="game-status" id="game-status" aria-live="polite">
-        take your time, love ♡
+        take your time hihi
       </p>
 
       <button class="secondary-btn" onclick="resetGame()">
@@ -553,7 +553,7 @@
 
       <p class="eyebrow">mission completed!</p>
       <div class="gift-box" aria-hidden="true">🎁</div>
-      <h1>you did it, love!</h1>
+      <h1>you did it!</h1>
 
       <p>all 5 cups collected. your birthday letter is ready.</p>
 
@@ -580,7 +580,7 @@
         <div class="pingu-fallback">🐧</div>
 
         <p class="eyebrow">a little letter for you</p>
-        <h1>happy 25th, love ♡</h1>
+        <h1>happy 25th, sayang! </h1>
         <p class="small-note">
           a few words from someone who's rooting for you.
         </p>
@@ -639,10 +639,10 @@
           cheering you on along the way.
         </p>
 
-        <p>happy birthday again, love. i'm really glad you exist.</p>
+        <p>happy birthday again, i'm really glad you exist.</p>
 
         <p class="signature">
-          your favorite person (hopefully) ♡
+          your favorite person (hopefully) hihi
         </p>
       </div>
 
@@ -743,16 +743,16 @@
 
       if (collected < totalCups) {
         const messages = [
-          "one more little coffee for you ♡",
+          "one more little coffee for you",
           "you're doing great, love!",
           "almost there, keep going ☕",
-          "just a little more love to collect!"
+          "just a little more to collect!"
         ];
 
         status.textContent = messages[collected - 1];
       } else {
         status.textContent =
-          "all collected! your surprise is ready ♡";
+          "all collected! your surprise is ready :)";
 
         setTimeout(() => {
           goTo("screen-unlock");
@@ -776,7 +776,7 @@
       document.getElementById("progress").style.width = "0%";
 
       document.getElementById("game-status").textContent =
-        "take your time, love ♡";
+        "take your time, love";
     }
 
     function openLetter() {
