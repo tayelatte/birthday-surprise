@@ -2,644 +2,672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>birthday.exe ♡</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#dceeff" />
+  <title>for my favorite person ♡</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+  <style>
+    :root {
+      --blue: #b9dcf8;
+      --blue-light: #edf7ff;
+      --blue-dark: #477ba8;
+      --navy: #244765;
+      --white: #ffffff;
+      --pink: #f8dce7;
+      --cream: #fffdf8;
+      --shadow: 0 12px 35px rgba(65, 111, 151, .13);
+    }
 
-:root {
-  --green: #a1f5b5;
-  --dark: #0e1511;
-  --blue: #eaf5fa;
-  --navy: #29485d;
-  --pink: #f5a6bd;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-* { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-  margin: 0;
-  font-family: 'DM Sans', sans-serif;
-  background: var(--blue);
-  color: var(--navy);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--navy);
+      background:
+        radial-gradient(circle at 10% 10%, #ffffff 0 2px, transparent 3px),
+        linear-gradient(145deg, #eaf6ff, #cce5fb 55%, #e8f4ff);
+      background-size: 38px 38px, auto;
+      overflow-x: hidden;
+    }
 
-.page {
-  display: none;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: 24px 18px;
-  align-items: center;
-  justify-content: center;
-}
+    button {
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.page.active { display: flex; }
+    button:focus-visible {
+      outline: 3px solid #477ba8;
+      outline-offset: 4px;
+    }
 
-button {
-  font: inherit;
-  cursor: pointer;
-  border: 0;
-  transition: transform .2s, opacity .2s;
-}
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 28px 16px;
+      align-items: center;
+      justify-content: center;
+    }
 
-button:hover { transform: translateY(-2px); }
-button:focus-visible { outline: 3px solid #8cb8d1; outline-offset: 4px; }
+    .screen.active {
+      display: flex;
+      animation: appear .55s ease both;
+    }
 
-.primary {
-  background: var(--navy);
-  color: white;
-  padding: 14px 22px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: .4px;
-}
+    .card {
+      width: 100%;
+      max-width: 620px;
+      padding: clamp(22px, 5vw, 42px);
+      border: 2px solid rgba(255, 255, 255, .9);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, .84);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
 
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  font-size: 10px;
-  color: #7293a7;
-}
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue-dark);
+      font-size: .76rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-/* PAGE 1: TERMINAL */
+    h1, h2, p {
+      overflow-wrap: anywhere;
+    }
 
-#terminalPage {
-  background:
-    radial-gradient(ellipse at top, #243c2c 0%, transparent 60%),
-    var(--dark);
-  color: var(--green);
-  font-family: 'DM Mono', monospace;
-}
+    h1 {
+      margin: 8px 0 14px;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      line-height: 1.12;
+    }
 
-.terminal {
-  width: min(700px, 100%);
-  background: #101914;
-  border: 1px solid #354a3b;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 25px 80px #0005;
-}
+    h2 {
+      font-size: clamp(1.45rem, 5vw, 2rem);
+      line-height: 1.25;
+    }
 
-.terminal-bar {
-  background: #1b2820;
-  border-bottom: 1px solid #354a3b;
-  padding: 15px 17px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  color: #b4c9b9;
-}
+    p {
+      line-height: 1.75;
+    }
 
-.dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #ee8585;
-}
-.dot:nth-child(2) { background: #e8c46d; }
-.dot:nth-child(3) { background: #7ed9a0; }
-.terminal-name { margin-left: auto; }
+    .penguin {
+      display: block;
+      margin: 0 auto 10px;
+      font-size: clamp(4.2rem, 15vw, 6rem);
+      animation: bob 2.4s ease-in-out infinite;
+    }
 
-.terminal-content {
-  padding: clamp(22px, 5vw, 38px);
-  font-size: clamp(11px, 2.8vw, 14px);
-  line-height: 2;
-  overflow-wrap: anywhere;
-}
+    .small-note {
+      color: #6d8ba4;
+      font-size: .88rem;
+    }
 
-#terminalText { white-space: pre-wrap; }
+    .primary-btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 999px;
+      background: var(--blue-dark);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 5px 0 #315d80;
+      transition: transform .2s, box-shadow .2s;
+    }
 
-.cursor {
-  display: inline-block;
-  width: 8px;
-  height: 15px;
-  background: var(--green);
-  animation: blink 1s steps(2, start) infinite;
-  vertical-align: -2px;
-}
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #315d80;
+    }
 
-@keyframes blink { to { visibility: hidden; } }
+    .primary-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #315d80;
+    }
 
-#terminalContinue {
-  display: none;
-  margin-top: 22px;
-  background: var(--green);
-  color: #122016;
-  padding: 13px 17px;
-  border-radius: 8px;
-  font: 500 12px 'DM Mono', monospace;
-}
+    .secondary-btn {
+      margin-top: 14px;
+      padding: 10px 18px;
+      border: 1px solid #bfdcf2;
+      border-radius: 999px;
+      background: #f4faff;
+      color: var(--navy);
+    }
 
-.terminal-note {
-  color: #9ab0a0;
-  font-size: 10px;
-  margin-top: 25px;
-}
+    /* SCREEN 1: TERMINAL */
 
-/* PAGE 2: MINI GAME */
+    .terminal-card {
+      background: #19354a;
+      color: #e2f4ff;
+      border: 2px solid #426984;
+      text-align: left;
+    }
 
-#gamePage {
-  background: linear-gradient(160deg, #fff5f6, #eaf5fa);
-}
+    .terminal-top {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 24px;
+    }
 
-.game-card {
-  width: min(530px, 100%);
-  text-align: center;
-  background: #ffffffd9;
-  border: 1px solid #f0dfe5;
-  border-radius: 25px;
-  padding: clamp(22px, 5vw, 38px);
-  box-shadow: 0 20px 60px #7894a51a;
-}
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #9dc9e7;
+    }
 
-.game-card h1, .letter-card h1 {
-  font: 500 clamp(30px, 7vw, 43px) 'Playfair Display', serif;
-  margin: 13px 0;
-  color: var(--navy);
-}
+    .dot:nth-child(2) { background: #c8e6f9; }
+    .dot:nth-child(3) { background: #f8dce7; }
 
-.description {
-  font-size: 14px;
-  line-height: 1.8;
-  color: #637e8d;
-}
+    .terminal-line {
+      margin: 12px 0;
+      font-family: "Courier New", monospace;
+      font-size: clamp(.78rem, 2.7vw, .98rem);
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
 
-.score {
-  margin: 22px auto 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-}
+    .terminal-green {
+      color: #bde9c8;
+    }
 
-.progress {
-  height: 7px;
-  background: #e5edf0;
-  border-radius: 99px;
-  overflow: hidden;
-  margin: 12px 0 20px;
-}
+    .terminal-pink {
+      color: #ffd7e5;
+    }
 
-#progressFill {
-  width: 0%;
-  height: 100%;
-  background: #7eb5d0;
-  transition: width .2s;
-}
+    .terminal-card h1 {
+      font-family: "Courier New", monospace;
+      font-size: clamp(1.8rem, 7vw, 2.7rem);
+    }
 
-#gameArena {
-  height: 225px;
-  background: #f0f8fb;
-  border: 1px dashed #b8d4e2;
-  border-radius: 17px;
-  position: relative;
-  overflow: hidden;
-  margin: 18px 0;
-}
+    .terminal-card .primary-btn {
+      background: #c2e3fa;
+      color: #19354a;
+      box-shadow: 0 5px 0 #7ca9cc;
+    }
 
-.game-heart {
-  position: absolute;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 5px 18px #a3c5d733;
-  font-size: 27px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  touch-action: manipulation;
-}
+    /* SCREEN 2: COFFEE GAME */
 
-#gameMessage {
-  min-height: 25px;
-  font-size: 12px;
-  color: #6c8797;
-  line-height: 1.7;
-}
+    .progress-wrap {
+      height: 10px;
+      width: 100%;
+      margin: 22px 0 10px;
+      border-radius: 99px;
+      background: #e4eff8;
+      overflow: hidden;
+    }
 
-#startGame { margin-top: 8px; }
+    .progress {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #8bbfe8, #477ba8);
+      transition: width .3s ease;
+    }
 
-#gameContinue {
-  display: none;
-  margin-top: 15px;
-}
+    .coffee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 25px auto 12px;
+      max-width: 390px;
+    }
 
-/* PAGE 3: PENGUIN */
+    .coffee-cup {
+      display: flex;
+      min-height: 92px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      border: 2px solid #d7eafb;
+      border-radius: 18px;
+      background: #f5faff;
+      font-size: 2.3rem;
+      transition: transform .2s, background .2s;
+    }
 
-#pinguPage {
-  background:
-    radial-gradient(ellipse at 15% 10%, #fff 0%, transparent 40%),
-    linear-gradient(150deg, #dceef8, #f8f7f0);
-}
+    .coffee-cup:hover:not(:disabled) {
+      transform: translateY(-4px) rotate(-3deg);
+      background: #e3f2ff;
+    }
 
-.pingu-card {
-  width: min(560px, 100%);
-  background: #ffffffd9;
-  border: 1px solid #d7e7ef;
-  border-radius: 26px;
-  padding: clamp(25px, 6vw, 48px);
-  text-align: center;
-  box-shadow: 0 20px 60px #527e9618;
-}
+    .coffee-cup:disabled {
+      cursor: default;
+      background: #e5f4e8;
+      border-color: #b9dec3;
+      opacity: 1;
+    }
 
-.penguin-art {
-  font-size: clamp(75px, 18vw, 110px);
-  line-height: 1.4;
-  margin: 12px 0;
-  animation: float 3s ease-in-out infinite;
-}
+    .cup-label {
+      font-size: .68rem;
+      color: #6d8ba4;
+      font-weight: bold;
+    }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+    .game-status {
+      min-height: 28px;
+      font-weight: bold;
+      color: var(--blue-dark);
+    }
 
-.pingu-card h1 {
-  font: 500 clamp(32px, 7vw, 45px) 'Playfair Display', serif;
-  margin: 10px 0;
-  color: var(--navy);
-}
+    /* SCREEN 3: UNLOCK */
 
-.pingu-subtitle {
-  color: #6e8795;
-  font-size: 14px;
-  line-height: 1.9;
-}
+    .gift-box {
+      font-size: 5rem;
+      margin: 10px 0;
+      animation: bob 2s ease-in-out infinite;
+    }
 
-.pingu-decor {
-  color: #88b5cf;
-  letter-spacing: 8px;
-  margin: 16px 0 25px;
-  font-size: 13px;
-}
+    /* SCREEN 4: LETTER */
 
-/* PAGE 4: LETTER */
+    .letter-card {
+      max-width: 700px;
+      text-align: left;
+      background: var(--cream);
+      border: 2px solid white;
+    }
 
-#letterPage {
-  background: linear-gradient(155deg, #fff7ef, #f5e9e3);
-  align-items: flex-start;
-  padding-top: 45px;
-  padding-bottom: 45px;
-}
+    .letter-card .letter-heading {
+      text-align: center;
+    }
 
-.letter-card {
-  width: min(620px, 100%);
-  background: #fffdf9;
-  border: 1px solid #f0e0d4;
-  border-radius: 23px;
-  padding: clamp(24px, 6vw, 48px);
-  box-shadow: 0 20px 60px #9c78631a;
-}
+    .letter-card .penguin {
+      text-align: center;
+    }
 
-.letter-card h1 { text-align: center; }
+    .letter-body {
+      margin-top: 25px;
+      font-size: 1rem;
+    }
 
-.letter-icon {
-  text-align: center;
-  font-size: 42px;
-  margin: 16px 0;
-}
+    .letter-body p {
+      margin: 0 0 18px;
+    }
 
-.letter-body {
-  color: #596c76;
-  font-size: 14px;
-  line-height: 2;
-}
+    .personal-memory {
+      padding: 15px 18px;
+      margin: 22px 0;
+      border-left: 4px solid #8bbfe8;
+      border-radius: 0 14px 14px 0;
+      background: #edf7ff;
+      font-style: italic;
+    }
 
-.letter-body p { margin: 18px 0; }
+    .signature {
+      margin-top: 28px;
+      color: var(--blue-dark);
+      font-weight: bold;
+    }
 
-.salutation {
-  color: #324f61;
-  font-family: 'Playfair Display', serif;
-  font-size: 19px;
-}
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      color: #8aa6bd;
+      font-size: .78rem;
+    }
 
-.signature {
-  color: #324f61;
-  font: italic 21px 'Playfair Display', serif;
-  margin-top: 28px;
-}
+    .confetti {
+      position: fixed;
+      top: -30px;
+      z-index: 10;
+      pointer-events: none;
+      animation: fall 3.5s linear forwards;
+    }
 
-.letter-footer {
-  text-align: center;
-  margin-top: 30px;
-  color: #91a1a5;
-  font-size: 10px;
-  letter-spacing: 1px;
-}
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(500deg);
+        opacity: .15;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .screen {
+        padding: 16px 10px;
+      }
+
+      .card {
+        padding: 24px 18px;
+        border-radius: 23px;
+      }
+
+      .coffee-grid {
+        gap: 8px;
+      }
+
+      .coffee-cup {
+        min-height: 82px;
+        font-size: 2rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- PAGE 1: TERMINAL OPENING -->
-<section class="page active" id="terminalPage">
-  <div class="terminal">
-    <div class="terminal-bar">
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="terminal-name">birthday.exe — terminal</span>
-    </div>
-
-    <div class="terminal-content">
-      <div id="terminalText"></div><span class="cursor" id="cursor"></span>
-      <button id="terminalContinue">
-        CLICK TO CONTINUE ↗
-      </button>
-      <div class="terminal-note">
-        a tiny program made for my favorite person ♡
+  <!-- SCREEN 1: BIRTHDAY TERMINAL -->
+  <section class="screen active" id="screen-home">
+    <div class="card terminal-card">
+      <div class="terminal-top" aria-hidden="true">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
       </div>
+
+      <p class="terminal-line terminal-green">> initializing birthday.exe...</p>
+      <p class="terminal-line">> user: William Gunawan</p>
+      <p class="terminal-line">> age: 25</p>
+      <p class="terminal-line">> status: still my favorite human ♡</p>
+      <p class="terminal-line terminal-green">> loading birthday wishes... 100%</p>
+
+      <hr style="border:0;border-top:1px solid #426984;margin:25px 0">
+
+      <h1>SUCCESS:<br>another year of you.</h1>
+      <p class="terminal-line terminal-pink">
+        ERROR 404: someone better than you not found.
+      </p>
+
+      <p style="margin-top:28px">happy birthday, sayang ♡</p>
+      <p class="small-note" style="color:#b4cddd">
+        i've made a little something just for you.
+      </p>
+
+      <button class="primary-btn" onclick="goTo('screen-game')">
+        start your surprise →
+      </button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- PAGE 2: MINI GAME -->
-<section class="page" id="gamePage">
-  <div class="game-card">
-    <div class="eyebrow">level 25 unlocked</div>
-    <h1>a tiny birthday mission</h1>
-    <p class="description">
-      before you get your birthday letter,<br>
-      there's one tiny mission for you.
-      <br><br>
-      collect 5 hearts to unlock your surprise. ♡
-    </p>
 
-    <div class="score">
-      HEARTS COLLECTED:
-      <span id="score">0</span> / 5
-    </div>
-
-    <div class="progress">
-      <div id="progressFill"></div>
-    </div>
-
-    <div id="gameArena">
-      <button class="game-heart" id="heartTarget"
-        aria-label="Collect a heart">♡</button>
-    </div>
-
-    <div id="gameMessage">
-      ready when you are, birthday boy.
-    </div>
-
-    <button class="primary" id="startGame">START MISSION ♡</button>
-
-    <button class="primary" id="gameContinue">
-      MISSION COMPLETE — CONTINUE ↗
-    </button>
-  </div>
-</section>
-
-<!-- PAGE 3: PINGU-INSPIRED GREETING -->
-<section class="page" id="pinguPage">
-  <div class="pingu-card">
-    <div class="eyebrow">a little corner of the internet</div>
-
-    <div class="penguin-art" aria-label="Penguin">🐧💙</div>
-
-    <h1>oh, hi birthday boy!</h1>
-
-    <p class="pingu-subtitle">
-      someone has a little something to tell you...<br>
-      and it's been waiting for you all day. ♡
-    </p>
-
-    <div class="pingu-decor">✦ · ♡ · ✦</div>
-
-    <button class="primary" id="openLetter">
-      OPEN YOUR BIRTHDAY LETTER ♡
-    </button>
-  </div>
-</section>
-
-<!-- PAGE 4: PERSONAL BIRTHDAY LETTER -->
-<section class="page" id="letterPage">
-  <article class="letter-card">
-    <div class="eyebrow" style="text-align:center">
-      a letter for your 25th year
-    </div>
-
-    <div class="letter-icon">💌</div>
-
-    <h1>happy birthday, love.</h1>
-
-    <div class="letter-body">
-      <p class="salutation">to my favorite person,</p>
+  <!-- SCREEN 2: COLLECT 5 COFFEE CUPS -->
+  <section class="screen" id="screen-game">
+    <div class="card">
+      <span class="penguin" aria-hidden="true">🐧</span>
+      <p class="eyebrow">a tiny birthday mission</p>
+      <h2>coffee for my favorite person ☕</h2>
 
       <p>
-        out of all the things life could bring me,
-        i'm really grateful it brought me to you.
+        because i know coffee is one of your favorite things,
+        i prepared 5 little cups for you.
       </p>
 
-      <p>
-        happy birthday, love.
-        hope life is a little kinder to you this year,
-        so that you'll find more reasons to smile,
-        and more days that remind you how good it
-        feels to be alive.
+      <p>tap each cup to collect them all!</p>
+
+      <div class="progress-wrap" aria-label="Coffee collection progress">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <p id="counter">0 / 5 cups collected</p>
+
+      <div class="coffee-grid" id="coffee-grid">
+        <button class="coffee-cup" aria-label="Collect coffee cup 1"
+          onclick="collectCup(this)">
+          ☕<span class="cup-label">cup 01</span>
+        </button>
+        <button class="coffee-cup" aria-label="Collect coffee cup 2"
+          onclick="collectCup(this)">
+          ☕<span class="cup-label">cup 02</span>
+        </button>
+        <button class="coffee-cup" aria-label="Collect coffee cup 3"
+          onclick="collectCup(this)">
+          ☕<span class="cup-label">cup 03</span>
+        </button>
+        <button class="coffee-cup" aria-label="Collect coffee cup 4"
+          onclick="collectCup(this)">
+          ☕<span class="cup-label">cup 04</span>
+        </button>
+        <button class="coffee-cup" aria-label="Collect coffee cup 5"
+          onclick="collectCup(this)">
+          ☕<span class="cup-label">cup 05</span>
+        </button>
+      </div>
+
+      <p class="game-status" id="game-status" aria-live="polite">
+        take your time, sayang ♡
       </p>
 
-      <p>
-        and on the days when life gets a little heavy,
-        please remember that you don't have to figure
-        everything out all at once. i'm always rooting
-        for you.
-      </p>
-
-      <p>
-        i hope 25 brings you good coffee, little moments
-        of peace, new things to be excited about, and
-        more reasons to be proud of the person you're
-        becoming.
-      </p>
-
-      <p>
-        you don't have to have everything figured out
-        to be doing well. i hope you give yourself the
-        same patience and kindness that you give to
-        the people you care about.
-      </p>
-
-      <p>
-        thank you for being part of my life, for all
-        the little moments we've shared, and for giving
-        me more memories to look forward to.
-      </p>
-
-      <p>
-        here's to another year of you, and to all the
-        good things that are still waiting to find you.
-      </p>
-
-      <p class="signature">
-        always rooting for you,<br>
-        your favorite person ♡
-      </p>
+      <button class="secondary-btn" onclick="resetGame()">
+        start over ↻
+      </button>
     </div>
+  </section>
 
-    <div class="letter-footer">
-      MADE WITH LOVE, JUST FOR YOU · LEVEL 25 ♡
+
+  <!-- SCREEN 3: SURPRISE UNLOCKED -->
+  <section class="screen" id="screen-unlock">
+    <div class="card">
+      <span class="penguin" aria-hidden="true">🐧</span>
+      <p class="eyebrow">mission completed!</p>
+      <div class="gift-box" aria-hidden="true">🎁</div>
+      <h1>you did it, sayang!</h1>
+
+      <p>
+        all 5 cups collected. your birthday letter is ready.
+      </p>
+
+      <p class="small-note">
+        warning: may contain an unreasonable amount of affection.
+      </p>
+
+      <button class="primary-btn" onclick="openLetter()">
+        open your letter ♡
+      </button>
     </div>
-  </article>
-</section>
+  </section>
 
-<script>
-// ========================================
-// PAGE NAVIGATION
-// ========================================
-function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(page => {
-    page.classList.remove('active');
-  });
 
-  document.getElementById(pageId).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+  <!-- SCREEN 4: BIRTHDAY LETTER -->
+  <section class="screen" id="screen-letter">
+    <article class="card letter-card">
+      <div class="letter-heading">
+        <span class="penguin" aria-hidden="true">🐧</span>
+        <p class="eyebrow">a little letter for you</p>
+        <h1>happy 25th, sayang ♡</h1>
+        <p class="small-note">a few words from someone who's rooting for you.</p>
+      </div>
 
-// ========================================
-// PAGE 1: TERMINAL TYPING ANIMATION
-// ========================================
-const terminalLines = [
-  '> initializing birthday.exe...',
-  '> user: William Gunawan',
-  '> age: 25',
-  '> status: still my favorite human',
-  '> loading wishes... 100%',
-  '',
-  'SUCCESS: another year of you.',
-  'ERROR 404: someone better than you not found.',
-  '',
-  'Happy birthday, love ♡'
-];
+      <div class="letter-body">
+        <p>out of all the things life could bring me, i'm really grateful it brought me to you.</p>
 
-const terminalText = document.getElementById('terminalText');
-const terminalCursor = document.getElementById('cursor');
-const terminalContinue = document.getElementById('terminalContinue');
+        <p>
+          happy birthday, love. hope life is a little kinder to you this year,
+          so that you'll find more reasons to smile, and more days that remind
+          you how good it feels to be alive.
+        </p>
 
-let lineIndex = 0;
-let charIndex = 0;
+        <p>
+          and on the days when life gets a little heavy, please remember that
+          you don't have to figure everything out all at once. i'm always
+          rooting for you.
+        </p>
 
-function typeTerminal() {
-  if (lineIndex >= terminalLines.length) {
-    terminalCursor.style.display = 'none';
-    terminalContinue.style.display = 'inline-block';
-    return;
-  }
+        <p>
+          i hope 25 brings you good coffee, a little more peace, exciting new
+          things to look forward to, and plenty of reasons to be proud of
+          yourself. i hope you get to see your hard work turn into something
+          meaningful, and that you remember to give yourself some credit for
+          how far you've come.
+        </p>
 
-  const currentLine = terminalLines[lineIndex];
+        <p>
+          you don't always have to have everything figured out, okay?
+          you can take your time, rest when you need to, and start again
+          whenever you're ready. you deserve the same kindness you give
+          to the people around you.
+        </p>
 
-  if (charIndex < currentLine.length) {
-    terminalText.textContent += currentLine.charAt(charIndex);
-    charIndex++;
+        <!-- PERSONAL MEMORY: EDIT THIS SECTION -->
+        <div class="personal-memory">
+          <p>
+            one of my favorite things about us is
+            <strong>[the day you took me to the library just to keep me company while i read.
+              the little moments when you made an ordinary day feel special.
+              the time we went out together and somehow ended up talking about the most random things.strong>.
+            it might seem like a small thing to you, but it's one of those
+            moments that makes me smile whenever i think about it.
+          </p>
+          <p>
+            i'm grateful for the little things we get to share, for the
+            memories we've made, and for the chance to know you a little
+            more as time goes by.
+          </p>
+        </div>
 
-    setTimeout(typeTerminal, 32);
-  } else {
-    terminalText.textContent += '\n';
-    lineIndex++;
-    charIndex = 0;
+        <p>
+          thank you for being you, for the little things you do, and for
+          letting me be part of your life. i hope this year gives you
+          moments that make you feel loved, appreciated, and excited about
+          what's ahead.
+        </p>
 
-    setTimeout(typeTerminal, currentLine === '' ? 180 : 280);
-  }
-}
+        <p>
+          whatever this next chapter looks like, i hope you know that
+          someone is genuinely happy to see you grow, and will keep cheering
+          you on along the way.
+        </p>
 
-setTimeout(typeTerminal, 700);
+        <p>happy birthday again, sayang. i'm really glad you exist. ♡</p>
 
-terminalContinue.addEventListener('click', () => {
-  showPage('gamePage');
-});
+        <p class="signature">
+          always rooting for you,<br>
+          your favorite person (hopefully) ♡
+        </p>
+      </div>
 
-// ========================================
-// PAGE 2: COLLECT 5 HEARTS GAME
-// ========================================
-const arena = document.getElementById('gameArena');
-const heartTarget = document.getElementById('heartTarget');
-const scoreText = document.getElementById('score');
-const progressFill = document.getElementById('progressFill');
-const gameMessage = document.getElementById('gameMessage');
-const startGame = document.getElementById('startGame');
-const gameContinue = document.getElementById('gameContinue');
+      <div style="text-align:center">
+        <button class="secondary-btn" onclick="goTo('screen-home')">
+          back to the beginning ↺
+        </button>
+      </div>
 
-let score = 0;
-let gameStarted = false;
-let gameFinished = false;
+      <div class="footer">
+        made with love, just for you ♡
+      </div>
+    </article>
+  </section>
 
-function moveHeart() {
-  const maxX = Math.max(0, arena.clientWidth - heartTarget.offsetWidth);
-  const maxY = Math.max(0, arena.clientHeight - heartTarget.offsetHeight);
 
-  heartTarget.style.left = Math.random() * maxX + 'px';
-  heartTarget.style.top = Math.random() * maxY + 'px';
-}
+  <script>
+    // CHANGE THIS IF YOU WANT TO PERSONALIZE THE WEBSITE FURTHER.
+    const recipient = "sayang";
 
-function finishGame() {
-  gameFinished = true;
-  gameStarted = false;
-  heartTarget.style.display = 'none';
-  startGame.style.display = 'none';
-  gameContinue.style.display = 'inline-block';
+    let collected = 0;
+    const totalCups = 5;
 
-  gameMessage.textContent =
-    "mission complete! you collected all 5 hearts. your surprise awaits. ♡";
-}
+    function goTo(screenId) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
 
-startGame.addEventListener('click', () => {
-  score = 0;
-  gameStarted = true;
-  gameFinished = false;
+      const target = document.getElementById(screenId);
+      target.classList.add("active");
 
-  scoreText.textContent = score;
-  progressFill.style.width = '0%';
-  startGame.style.display = 'none';
-  gameContinue.style.display = 'none';
-  heartTarget.style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-  gameMessage.textContent =
-    'tap the heart whenever you see it. you need 5!';
+    function collectCup(button) {
+      if (button.disabled) return;
 
-  moveHeart();
-});
+      button.disabled = true;
+      button.innerHTML = '💙<span class="cup-label">collected!</span>';
 
-heartTarget.addEventListener('click', () => {
-  if (!gameStarted || gameFinished) return;
+      collected++;
 
-  score++;
-  scoreText.textContent = score;
-  progressFill.style.width = (score / 5 * 100) + '%';
+      document.getElementById("counter").textContent =
+        `${collected} / ${totalCups} cups collected`;
 
-  if (score >= 5) {
-    finishGame();
-  } else {
-    gameMessage.textContent =
-      ['you got this!', 'one more little step ♡',
-       'look at you go!', 'almost there!'][score - 1];
+      document.getElementById("progress").style.width =
+        `${(collected / totalCups) * 100}%`;
 
-    moveHeart();
-  }
-});
+      const status = document.getElementById("game-status");
 
-gameContinue.addEventListener('click', () => {
-  showPage('pinguPage');
-});
+      if (collected < totalCups) {
+        status.textContent = [
+          "one more little coffee for you ♡",
+          "you're doing great, sayang!",
+          "almost there, keep going ☕",
+          "just a little more love to collect!"
+        ][Math.min(collected - 1, 3)];
+      } else {
+        status.textContent = "all collected! your surprise is ready ♡";
 
-// ========================================
-// PAGE 3: PINGU PAGE
-// ========================================
-document.getElementById('openLetter').addEventListener('click', () => {
-  showPage('letterPage');
-});
-</script>
+        setTimeout(() => {
+          goTo("screen-unlock");
+          makeConfetti();
+        }, 800);
+      }
+    }
+
+    function resetGame() {
+      collected = 0;
+
+      document.querySelectorAll(".coffee-cup").forEach((button, index) => {
+        button.disabled = false;
+        button.innerHTML =
+          `☕<span class="cup-label">cup 0${index + 1}</span>`;
+      });
+
+      document.getElementById("counter").textContent = "0 / 5 cups collected";
+      document.getElementById("progress").style.width = "0%";
+      document.getElementById("game-status").textContent =
+        "take your time, sayang ♡";
+    }
+
+    function openLetter() {
+      goTo("screen-letter");
+      makeConfetti();
+    }
+
+    function makeConfetti() {
+      const symbols = ["💙", "🤍", "☕", "🐧", "♡"];
+
+      for (let i = 0; i < 22; i++) {
+        const item = document.createElement("span");
+
+        item.className = "confetti";
+        item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.fontSize = (14 + Math.random() * 15) + "px";
+        item.style.animationDelay = (Math.random() * 1.2) + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 5000);
+      }
+    }
+  </script>
 
 </body>
 </html>
