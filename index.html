@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>birthday.exe ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root {
+  --green: #a1f5b5;
+  --dark: #0e1511;
+  --blue: #eaf5fa;
+  --navy: #29485d;
+  --pink: #f5a6bd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--blue);
+  color: var(--navy);
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 24px 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.page.active { display: flex; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  transition: transform .2s, opacity .2s;
+}
+
+button:hover { transform: translateY(-2px); }
+button:focus-visible { outline: 3px solid #8cb8d1; outline-offset: 4px; }
+
+.primary {
+  background: var(--navy);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 10px;
+  color: #7293a7;
+}
+
+/* PAGE 1: TERMINAL */
+
+#terminalPage {
+  background:
+    radial-gradient(ellipse at top, #243c2c 0%, transparent 60%),
+    var(--dark);
+  color: var(--green);
+  font-family: 'DM Mono', monospace;
+}
+
+.terminal {
+  width: min(700px, 100%);
+  background: #101914;
+  border: 1px solid #354a3b;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px #0005;
+}
+
+.terminal-bar {
+  background: #1b2820;
+  border-bottom: 1px solid #354a3b;
+  padding: 15px 17px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #b4c9b9;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ee8585;
+}
+.dot:nth-child(2) { background: #e8c46d; }
+.dot:nth-child(3) { background: #7ed9a0; }
+.terminal-name { margin-left: auto; }
+
+.terminal-content {
+  padding: clamp(22px, 5vw, 38px);
+  font-size: clamp(11px, 2.8vw, 14px);
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+#terminalText { white-space: pre-wrap; }
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: var(--green);
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: -2px;
+}
+
+@keyframes blink { to { visibility: hidden; } }
+
+#terminalContinue {
+  display: none;
+  margin-top: 22px;
+  background: var(--green);
+  color: #122016;
+  padding: 13px 17px;
+  border-radius: 8px;
+  font: 500 12px 'DM Mono', monospace;
+}
+
+.terminal-note {
+  color: #9ab0a0;
+  font-size: 10px;
+  margin-top: 25px;
+}
+
+/* PAGE 2: MINI GAME */
+
+#gamePage {
+  background: linear-gradient(160deg, #fff5f6, #eaf5fa);
+}
+
+.game-card {
+  width: min(530px, 100%);
+  text-align: center;
+  background: #ffffffd9;
+  border: 1px solid #f0dfe5;
+  border-radius: 25px;
+  padding: clamp(22px, 5vw, 38px);
+  box-shadow: 0 20px 60px #7894a51a;
+}
+
+.game-card h1, .letter-card h1 {
+  font: 500 clamp(30px, 7vw, 43px) 'Playfair Display', serif;
+  margin: 13px 0;
+  color: var(--navy);
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #637e8d;
+}
+
+.score {
+  margin: 22px auto 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.progress {
+  height: 7px;
+  background: #e5edf0;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0 20px;
+}
+
+#progressFill {
+  width: 0%;
+  height: 100%;
+  background: #7eb5d0;
+  transition: width .2s;
+}
+
+#gameArena {
+  height: 225px;
+  background: #f0f8fb;
+  border: 1px dashed #b8d4e2;
+  border-radius: 17px;
+  position: relative;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+.game-heart {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 5px 18px #a3c5d733;
+  font-size: 27px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+#gameMessage {
+  min-height: 25px;
+  font-size: 12px;
+  color: #6c8797;
+  line-height: 1.7;
+}
+
+#startGame { margin-top: 8px; }
+
+#gameContinue {
+  display: none;
+  margin-top: 15px;
+}
+
+/* PAGE 3: PENGUIN */
+
+#pinguPage {
+  background:
+    radial-gradient(ellipse at 15% 10%, #fff 0%, transparent 40%),
+    linear-gradient(150deg, #dceef8, #f8f7f0);
+}
+
+.pingu-card {
+  width: min(560px, 100%);
+  background: #ffffffd9;
+  border: 1px solid #d7e7ef;
+  border-radius: 26px;
+  padding: clamp(25px, 6vw, 48px);
+  text-align: center;
+  box-shadow: 0 20px 60px #527e9618;
+}
+
+.penguin-art {
+  font-size: clamp(75px, 18vw, 110px);
+  line-height: 1.4;
+  margin: 12px 0;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.pingu-card h1 {
+  font: 500 clamp(32px, 7vw, 45px) 'Playfair Display', serif;
+  margin: 10px 0;
+  color: var(--navy);
+}
+
+.pingu-subtitle {
+  color: #6e8795;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.pingu-decor {
+  color: #88b5cf;
+  letter-spacing: 8px;
+  margin: 16px 0 25px;
+  font-size: 13px;
+}
+
+/* PAGE 4: LETTER */
+
+#letterPage {
+  background: linear-gradient(155deg, #fff7ef, #f5e9e3);
+  align-items: flex-start;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.letter-card {
+  width: min(620px, 100%);
+  background: #fffdf9;
+  border: 1px solid #f0e0d4;
+  border-radius: 23px;
+  padding: clamp(24px, 6vw, 48px);
+  box-shadow: 0 20px 60px #9c78631a;
+}
+
+.letter-card h1 { text-align: center; }
+
+.letter-icon {
+  text-align: center;
+  font-size: 42px;
+  margin: 16px 0;
+}
+
+.letter-body {
+  color: #596c76;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.letter-body p { margin: 18px 0; }
+
+.salutation {
+  color: #324f61;
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+}
+
+.signature {
+  color: #324f61;
+  font: italic 21px 'Playfair Display', serif;
+  margin-top: 28px;
+}
+
+.letter-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #91a1a5;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: TERMINAL OPENING -->
+<section class="page active" id="terminalPage">
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="terminal-name">birthday.exe — terminal</span>
+    </div>
+
+    <div class="terminal-content">
+      <div id="terminalText"></div><span class="cursor" id="cursor"></span>
+      <button id="terminalContinue">
+        CLICK TO CONTINUE ↗
+      </button>
+      <div class="terminal-note">
+        a tiny program made for my favorite person ♡
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: MINI GAME -->
+<section class="page" id="gamePage">
+  <div class="game-card">
+    <div class="eyebrow">level 25 unlocked</div>
+    <h1>a tiny birthday mission</h1>
+    <p class="description">
+      before you get your birthday letter,<br>
+      there's one tiny mission for you.
+      <br><br>
+      collect 5 hearts to unlock your surprise. ♡
+    </p>
+
+    <div class="score">
+      HEARTS COLLECTED:
+      <span id="score">0</span> / 5
+    </div>
+
+    <div class="progress">
+      <div id="progressFill"></div>
+    </div>
+
+    <div id="gameArena">
+      <button class="game-heart" id="heartTarget"
+        aria-label="Collect a heart">♡</button>
+    </div>
+
+    <div id="gameMessage">
+      ready when you are, birthday boy.
+    </div>
+
+    <button class="primary" id="startGame">START MISSION ♡</button>
+
+    <button class="primary" id="gameContinue">
+      MISSION COMPLETE — CONTINUE ↗
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 3: PINGU-INSPIRED GREETING -->
+<section class="page" id="pinguPage">
+  <div class="pingu-card">
+    <div class="eyebrow">a little corner of the internet</div>
+
+    <div class="penguin-art" aria-label="Penguin">🐧💙</div>
+
+    <h1>oh, hi birthday boy!</h1>
+
+    <p class="pingu-subtitle">
+      someone has a little something to tell you...<br>
+      and it's been waiting for you all day. ♡
+    </p>
+
+    <div class="pingu-decor">✦ · ♡ · ✦</div>
+
+    <button class="primary" id="openLetter">
+      OPEN YOUR BIRTHDAY LETTER ♡
+    </button>
+  </div>
+</section>
+
+<!-- PAGE 4: PERSONAL BIRTHDAY LETTER -->
+<section class="page" id="letterPage">
+  <article class="letter-card">
+    <div class="eyebrow" style="text-align:center">
+      a letter for your 25th year
+    </div>
+
+    <div class="letter-icon">💌</div>
+
+    <h1>happy birthday, love.</h1>
+
+    <div class="letter-body">
+      <p class="salutation">to my favorite person,</p>
+
+      <p>
+        out of all the things life could bring me,
+        i'm really grateful it brought me to you.
+      </p>
+
+      <p>
+        happy birthday, love.
+        hope life is a little kinder to you this year,
+        so that you'll find more reasons to smile,
+        and more days that remind you how good it
+        feels to be alive.
+      </p>
+
+      <p>
+        and on the days when life gets a little heavy,
+        please remember that you don't have to figure
+        everything out all at once. i'm always rooting
+        for you.
+      </p>
+
+      <p>
+        i hope 25 brings you good coffee, little moments
+        of peace, new things to be excited about, and
+        more reasons to be proud of the person you're
+        becoming.
+      </p>
+
+      <p>
+        you don't have to have everything figured out
+        to be doing well. i hope you give yourself the
+        same patience and kindness that you give to
+        the people you care about.
+      </p>
+
+      <p>
+        thank you for being part of my life, for all
+        the little moments we've shared, and for giving
+        me more memories to look forward to.
+      </p>
+
+      <p>
+        here's to another year of you, and to all the
+        good things that are still waiting to find you.
+      </p>
+
+      <p class="signature">
+        always rooting for you,<br>
+        your favorite person ♡
+      </p>
+    </div>
+
+    <div class="letter-footer">
+      MADE WITH LOVE, JUST FOR YOU · LEVEL 25 ♡
+    </div>
+  </article>
+</section>
+
+<script>
+// ========================================
+// PAGE NAVIGATION
+// ========================================
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ========================================
+// PAGE 1: TERMINAL TYPING ANIMATION
+// ========================================
+const terminalLines = [
+  '> initializing birthday.exe...',
+  '> user: my favorite person',
+  '> age: 25',
+  '> status: still my favorite human',
+  '> loading wishes... 100%',
+  '',
+  'SUCCESS: another year of you.',
+  'ERROR 404: someone better than you not found.',
+  '',
+  'Happy birthday, love ♡'
+];
+
+const terminalText = document.getElementById('terminalText');
+const terminalCursor = document.getElementById('cursor');
+const terminalContinue = document.getElementById('terminalContinue');
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeTerminal() {
+  if (lineIndex >= terminalLines.length) {
+    terminalCursor.style.display = 'none';
+    terminalContinue.style.display = 'inline-block';
+    return;
+  }
+
+  const currentLine = terminalLines[lineIndex];
+
+  if (charIndex < currentLine.length) {
+    terminalText.textContent += currentLine.charAt(charIndex);
+    charIndex++;
+
+    setTimeout(typeTerminal, 32);
+  } else {
+    terminalText.textContent += '\n';
+    lineIndex++;
+    charIndex = 0;
+
+    setTimeout(typeTerminal, currentLine === '' ? 180 : 280);
+  }
+}
+
+setTimeout(typeTerminal, 700);
+
+terminalContinue.addEventListener('click', () => {
+  showPage('gamePage');
+});
+
+// ========================================
+// PAGE 2: COLLECT 5 HEARTS GAME
+// ========================================
+const arena = document.getElementById('gameArena');
+const heartTarget = document.getElementById('heartTarget');
+const scoreText = document.getElementById('score');
+const progressFill = document.getElementById('progressFill');
+const gameMessage = document.getElementById('gameMessage');
+const startGame = document.getElementById('startGame');
+const gameContinue = document.getElementById('gameContinue');
+
+let score = 0;
+let gameStarted = false;
+let gameFinished = false;
+
+function moveHeart() {
+  const maxX = Math.max(0, arena.clientWidth - heartTarget.offsetWidth);
+  const maxY = Math.max(0, arena.clientHeight - heartTarget.offsetHeight);
+
+  heartTarget.style.left = Math.random() * maxX + 'px';
+  heartTarget.style.top = Math.random() * maxY + 'px';
+}
+
+function finishGame() {
+  gameFinished = true;
+  gameStarted = false;
+  heartTarget.style.display = 'none';
+  startGame.style.display = 'none';
+  gameContinue.style.display = 'inline-block';
+
+  gameMessage.textContent =
+    "mission complete! you collected all 5 hearts. your surprise awaits. ♡";
+}
+
+startGame.addEventListener('click', () => {
+  score = 0;
+  gameStarted = true;
+  gameFinished = false;
+
+  scoreText.textContent = score;
+  progressFill.style.width = '0%';
+  startGame.style.display = 'none';
+  gameContinue.style.display = 'none';
+  heartTarget.style.display = 'flex';
+
+  gameMessage.textContent =
+    'tap the heart whenever you see it. you need 5!';
+
+  moveHeart();
+});
+
+heartTarget.addEventListener('click', () => {
+  if (!gameStarted || gameFinished) return;
+
+  score++;
+  scoreText.textContent = score;
+  progressFill.style.width = (score / 5 * 100) + '%';
+
+  if (score >= 5) {
+    finishGame();
+  } else {
+    gameMessage.textContent =
+      ['you got this!', 'one more little step ♡',
+       'look at you go!', 'almost there!'][score - 1];
+
+    moveHeart();
+  }
+});
+
+gameContinue.addEventListener('click', () => {
+  showPage('pinguPage');
+});
+
+// ========================================
+// PAGE 3: PINGU PAGE
+// ========================================
+document.getElementById('openLetter').addEventListener('click', () => {
+  showPage('letterPage');
+});
+</script>
+
+</body>
+</html>
